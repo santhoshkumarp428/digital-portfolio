@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Coffee Shop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    /* Internal CSS */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      color: #333;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    .coffee-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .coffee-card {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .coffee-card:hover {
+      transform: translateY(-5px); /* Slight lift on hover */
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Glow effect */
+    }
+
+    .coffee-card img {
+      width: 100%;
+      border-radius: 10px;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .coffee-card img:hover {
+      transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+    .coffee-card h3 {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .coffee-card p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .coffee-card button {
+      padding: 0.5rem 1rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .coffee-card button:hover {
+      background: #ff9a9e;
+    }
+
+    .cart {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 250px;
+    }
+
+    .cart h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .cart ul li {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .cart ul li button {
+      background: #ff9a9e;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .cart ul li button:hover {
+      background: #ff7a7e;
+    }
+
+    .cart button.clear-cart {
+      width: 100%;
+      padding: 0.5rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .cart button.clear-cart:hover {
+      background: #ff9a9e;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kaname's  E-Coffee Shop</h1>
+    <p>Order your favorite coffee blends online!</p>
+  </header>
+
+  <!-- Coffee Items -->
+  <div class="coffee-container">
+    <!-- Coffee Card 1 -->
+    <div class="coffee-card">
+      <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" alt="Espresso">
+      <h3>Espresso</h3>
+      <p>A strong and flavorful coffee blend.</p>
+      <button onclick="addToCart('Espresso')">Add to Cart</button>
+    </div>
+
+    <!-- Coffee Card 2 -->
+    <div class="coffee-card">
+      <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" alt="Cappuccino">
+      <h3>Cappuccino</h3>
+      <p>A creamy and delicious coffee.</p>
+      <button onclick="addToCart('Cappuccino')">Add to Cart</button>
+    </div>
+
+    <!-- Coffee Card 3 -->
+    <div class="coffee-card">
+      <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" alt="Latte">
+      <h3>Latte</h3>
+      <p>A smooth and milky coffee.</p>
+      <button onclick="addToCart('Latte')">Add to Cart</button>
+    </div>
+
+    <!-- Coffee Card 4 -->
+    <div class="coffee-card">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" alt="Americano">
+      <h3>Americano</h3>
+      <p>A bold and rich coffee.</p>
+      <button onclick="addToCart('Americano')">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Cart -->
+  <div class="cart">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <button class="clear-cart" onclick="clearCart()">Clear Cart</button>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Kaname's E-Coffee Shop. All rights reserved.</p>
+  </footer>
+
+  <!-- Internal JavaScript -->
+  <script>
+    // Cart functionality
+    let cart = [];
+
+    function addToCart(item) {
+      cart.push(item);
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      cartItems.innerHTML = '';
+      cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${index + 1}. ${item}`;
+        // Add a remove button for each item
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = () => removeFromCart(index);
+        li.appendChild(removeButton);
+        cartItems.appendChild(li);
+      });
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1); // Remove the item at the specified index
+      updateCart(); // Update the cart display
+    }
+
+    function clearCart() {
+      cart = []; // Clear the cart array
+      updateCart(); // Update the cart display
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    /* Internal CSS */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin: 0 1rem;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff9a9e;
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Home Section */
+    #home {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
+
+    #home h1 {
+      font-size: 3rem;
+      color: #fff;
+    }
+
+    #home p {
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    /* About Section */
+    #about {
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    }
+
+    #about .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      margin-bottom: 1rem;
+    }
+
+    #about h2 {
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    #about p {
+      font-size: 1.2rem;
+      color: #333;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* Personal Info Section */
+    #personal-info {
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    }
+
+    #personal-info .info-card {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: left;
+    }
+
+    #personal-info .info-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    #personal-info .info-card p {
+      font-size: 1.1rem;
+      color: #555;
+      margin: 0.5rem 0;
+    }
+
+    /* Projects Section */
+    #projects {
+      background: linear-gradient(135deg, #84fab0, #8fd3f4);
+    }
+
+    #projects h2 {
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    #projects .project-card {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    #projects .project-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    #projects .project-card p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    #projects .project-card .shop-now-btn {
+      padding: 0.5rem 1rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #projects .project-card .shop-now-btn:hover {
+      background: #ff9a9e;
+    }
+
+    /* Hire Me Section */
+    #hire {
+      background: linear-gradient(135deg, #84fab0, #8fd3f4);
+    }
+
+    #hire h2 {
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    #hire .why-hire-me {
+      font-size: 1.2rem;
+      color: #333;
+      max-width: 800px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1.5rem;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar div {
+      height: 100%;
+      background: #ff9a9e;
+      border-radius: 10px;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: linear-gradient(135deg, #ff9a9e, #fbc2eb);
+    }
+
+    #contact h2 {
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    #contact .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    #contact .contact-info a {
+      color: #333;
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    #contact .contact-info a:hover {
+      color: #ff9a9e;
+    }
+
+    #contact form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #contact input, #contact textarea {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #contact button {
+      padding: 0.5rem 1rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #contact button:hover {
+      background: #ff9a9e;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Download Resume Button */
+    .download-btn {
+      padding: 0.5rem 1rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: #ff9a9e;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#personal-info">Personal Info</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#hire">Hire Me</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#" id="downloadResume">Download Resume</a></li>
+    </ul>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home">
+    <h1>Welcome to My Portfolio</h1>
+    <p>I am a passionate developer ready to create amazing things!</p>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <img src="profile.jpg" alt="Profile Picture" class="profile-pic"> <!-- Replace with your profile picture -->
+    <h2>About Me</h2>
+    <p>
+      Hi, I'm Santhosh Kumar P a full-stack developer with a passion for building beautiful and functional websites. 
+      I specialize in HTML, CSS, JavaScript, and modern frameworks. With a keen eye for design and a love for problem-solving, 
+      I strive to create seamless user experiences. Let's work together to bring your ideas to life!
+    </p>
+  </section>
+
+  <!-- Personal Info Section -->
+  <section id="personal-info">
+    <div class="info-card">
+      <h3>Personal Information</h3>
+      <p><strong>Name:</strong> Santosh Kumar P</p>
+      <p><strong>Date of Birth:</strong> 29/09/2006</p>
+      <p><strong>Age:</strong> 18</p>
+      <p><strong>Address:</strong> 123 Main St, City, NYC</p>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3>Kaname's E-Coffee Shop</h3>
+      <p>An online coffee shop where you can order your favorite coffee blends.</p>
+      <button class="shop-now-btn" onclick="window.location.href='coffee.html'">Shop Now</button>
+    </div>
+  </section>
+
+  <!-- Hire Me Section -->
+  <section id="hire">
+    <h2>Hire Me</h2>
+    <p class="why-hire-me">
+      I bring a unique combination of technical expertise, creativity, and dedication to every project. 
+      With years of experience in web development, I deliver high-quality solutions tailored to your needs. 
+      I am committed to continuous learning and staying updated with the latest technologies. 
+      Let's collaborate to turn your vision into reality!
+    </p>
+    <div class="skills-container">
+      <!-- Soft Skills -->
+      <div class="skill-card">
+        <h3>Soft Skills</h3>
+        <div class="progress-bar"><div style="width: 90%;"></div></div>
+        <p>Communication</p>
+        <div class="progress-bar"><div style="width: 85%;"></div></div>
+        <p>Teamwork</p>
+        <div class="progress-bar"><div style="width: 95%;"></div></div>
+        <p>Problem Solving</p>
+      </div>
+      <!-- Technical Skills -->
+      <div class="skill-card">
+        <h3>Technical Skills</h3>
+        <div class="progress-bar"><div style="width: 95%;"></div></div>
+        <p>HTML/CSS</p>
+        <div class="progress-bar"><div style="width: 90%;"></div></div>
+        <p>JavaScript</p>
+        <div class="progress-bar"><div style="width: 85%;"></div></div>
+        <p>React</p>
+      </div>
+      <!-- Additional Skills -->
+      <div class="skill-card">
+        <h3>Additional Skills</h3>
+        <div class="progress-bar"><div style="width: 80%;"></div></div>
+        <p>UI/UX Design</p>
+        <div class="progress-bar"><div style="width: 75%;"></div></div>
+        <p>Project Management</p>
+        <div class="progress-bar"><div style="width: 70%;"></div></div>
+        <p>DevOps</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-info">
+      <a href="https://github.com/santhoshkumarp428" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://wa.me/+917395885405" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/mr_kaname_1329?igsh=a2lrYjh3NWptaG8z" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:psanthoshkumarb23114bsccs@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Santhosh's portfolio!. All rights reserved.</p>
+  </footer>
+
+  <!-- Internal JavaScript -->
+  <script>
+    // Smooth Scroll Effect
+    document.querySelectorAll('nav ul li a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Download Resume
+    document.getElementById('downloadResume').addEventListener('click', function(e) {
+      e.preventDefault();
+      const link = document.createElement('a');
+      link.href = 'resume.pdf'; // Replace with your resume file path
+      link.download = 'resume.pdf';
+      link.click();
+    });
+
+    // Fade In Effect on Scroll
+    const sections = document.querySelectorAll('section');
+    const options = {
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Contact Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      alert(`Thank you, ${name}! Your message has been sent.`);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
